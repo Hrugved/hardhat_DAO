@@ -1,10 +1,7 @@
 import { DeployFunction } from "hardhat-deploy/dist/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { ethers } from 'hardhat'
-
-const VOTING_PERIOD = 5
-const VOTING_DELAY = 1
-const VOTING_PERCENTAGE = 4
+import { VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE } from "../helper-hardhat-config";
 
 const deployGovernorContract: DeployFunction = async function (hre:HardhatRuntimeEnvironment) {
   const {getNamedAccounts,deployments,network} = hre
@@ -14,7 +11,7 @@ const deployGovernorContract: DeployFunction = async function (hre:HardhatRuntim
   const timeLock = await get('TimeLock')
   const governorContract = await deploy('GovernorContract',{
     from: deployer,
-    args: [governanceToken.address,timeLock.address,VOTING_DELAY,VOTING_PERIOD,VOTING_PERCENTAGE],
+    args: [governanceToken.address,timeLock.address,VOTING_DELAY,VOTING_PERIOD,QUORUM_PERCENTAGE],
     log:true
   })
 }
