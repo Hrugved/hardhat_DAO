@@ -5,3 +5,4 @@ deployments
 .env
 coverage
 coverage.json
+typechain-types
